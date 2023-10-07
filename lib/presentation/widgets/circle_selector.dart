@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import '../pages/food_page.dart';
 
 class CircleSpinner extends StatefulWidget {
   @override
@@ -28,6 +29,11 @@ class _CircleSpinnerState extends State<CircleSpinner> {
 
     return Center(
       child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => FoodPage()),
+          );
+        },
         onPanStart: (details) {
           startRotation = currentRotation;
         },
@@ -77,10 +83,12 @@ class CircleSpinnerPainter extends CustomPainter {
       final y = centerY + radius * math.sin(angle);
 
       final paint = Paint()
-        ..color = colors[i % colors.length] // Выбор цвета из списка
+        ..color = colors[i % colors.length]
         ..style = PaintingStyle.fill;
 
-      final circleRadius = radii[i % radii.length]; // Выбор радиуса из списка
+      final circleRadius = radii[i % radii.length];
+
+      // Рисуем каждый наружный круг
       canvas.drawCircle(Offset(x, y), circleRadius, paint);
     }
   }
