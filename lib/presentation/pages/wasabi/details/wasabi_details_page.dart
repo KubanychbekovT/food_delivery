@@ -4,6 +4,7 @@ import 'package:glovo_clone/presentation/pages/gifts_page.dart';
 import 'package:glovo_clone/presentation/pages/supermarket_page.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/details/drinks.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/details/sets.dart';
+import 'package:glovo_clone/presentation/pages/wasabi/details/snacks.dart';
 
 class WasabiDetailsPage extends StatefulWidget {
   const WasabiDetailsPage({super.key});
@@ -43,7 +44,8 @@ class _WasabiDetailsPageState extends State<WasabiDetailsPage> {
           ),
           body: TabBarView(
             children: [
-              SetsPage()
+              SetsPage(),
+              SnackPage(),
             ],
           ),
         ),

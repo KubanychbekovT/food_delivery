@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class SnackPage extends StatelessWidget {
   final List<SnackSet> snackSets = [
     SnackSet(
-      name: 'Праздничный сет',
-      description: 'Лосось, огурец, авокадо, филадельфия, рис',
-      price: 3200.00,
+      name: 'Нагетсы',
+      description: 'Нагетсы, картошка фри, чили соус',
+      price: 450.00,
       imageUrl: 'https://example.com/philadelphia.jpg',
     ),
     SnackSet(
-      name: 'Сет "Калифорния"',
+      name: 'Крылышки Баффало',
       description: 'Краб, авокадо, огурец, рис, икра масаго',
-      price: 2500.00,
+      price: 450.00,
       imageUrl: 'https://example.com/california.jpg',
     ),
   ];
@@ -40,7 +40,7 @@ class SnackPage extends StatelessWidget {
             top: 20, // Расположение текста сверху
             left: 20, // Расположение текста слева
             child: Text(
-              'Список сетов суши',
+              'Закуски',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
