@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:glovo_clone/presentation/pages/charity_page.dart';
 import 'dart:math' as math;
-
+import '../pages/courier_page.dart';
 import '../pages/food_page.dart';
+import '../pages/gifts_page.dart';
 import '../pages/health_page.dart';
 import '../pages/supermarket_page.dart';
-import '../pages/wasabi_page.dart';
+import '../pages/wasabi/wasabi_page.dart';
 
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 class CircleSpinner extends StatefulWidget {
   @override
@@ -18,15 +16,6 @@ class CircleSpinner extends StatefulWidget {
 class _CircleSpinnerState extends State<CircleSpinner> {
   double startRotation = 0.0;
   double currentRotation = 0.0;
-
-  final List<Widget> pages = [
-    FoodPage(),
-    SupermarketPage(),
-    WasabiPage(),
-    HealthPage(),
-    CharityPage(),
-    // Добавьте сюда другие страницы...
-  ];
 
   final List<String> texts = [
     'Твори Добро',
@@ -46,20 +35,23 @@ class _CircleSpinnerState extends State<CircleSpinner> {
       Colors.white,
       Colors.white,
       Colors.white,
+      Colors.white,
+      Colors.white,
     ];
 
-    final radii = [50.0, 50.0, 50.0, 50.0];
+    final radii = [50.0, 50.0, 50.0, 50.0, 50.0, 50.0];
 
     return Center(
       child: GestureDetector(
         onTap: () {
           double normalizedRotation = currentRotation % (2 * math.pi); // Нормализуем угол к диапазону [0, 2*pi]
-          int pageIndex = (normalizedRotation / (math.pi / 2)).round();
+          int pageIndex = (normalizedRotation / (math.pi / 3)).round();
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => pages[pageIndex]),
+            MaterialPageRoute(
+              builder: (context) => buildPage(pageIndex),
+            ),
           );
         },
-
         onPanStart: (details) {
           startRotation = currentRotation;
         },
@@ -96,6 +88,26 @@ class _CircleSpinnerState extends State<CircleSpinner> {
         ),
       ),
     );
+  }
+
+  Widget buildPage(int pageIndex) {
+    print("BuildPage $pageIndex");
+    switch (pageIndex) {
+      case 0:
+        return WasabiPage();
+      case 1:
+        return SupermarketPage();
+      case 2:
+        return HealthPage();
+      case 3:
+        return GiftsPage();
+      case 4:
+        return WasabiPage();
+      case 5:
+        return CourierPage();
+       default:
+         return Container(); // Вернуть пустой контейнер по умолчанию
+    }
   }
 }
 
@@ -134,7 +146,7 @@ class CircleSpinnerPainter extends CustomPainter {
         fontSize: 12.0,
       );
       final textSpan = TextSpan(
-        text: texts[i % texts.length],
+        text: texts[0],
         style: textStyle,
       );
       final textPainter = TextPainter(
