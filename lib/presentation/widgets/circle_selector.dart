@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutter/material.dart';
+import 'package:glovo_clone/presentation/pages/food_page.dart';
+import 'package:touchable/touchable.dart';
 import '../pages/courier_page.dart';
-import '../pages/food_page.dart';
 import '../pages/gifts_page.dart';
 import '../pages/health_page.dart';
 import '../pages/supermarket_page.dart';
 import '../pages/wasabi/wasabi_page.dart';
-
 
 class CircleSpinner extends StatefulWidget {
   @override
@@ -18,12 +18,13 @@ class _CircleSpinnerState extends State<CircleSpinner> {
   double currentRotation = 0.0;
 
   final List<String> texts = [
-    'Твори Добро',
+    'Еда',
     'Супермаркеты',
     'Здоровье и красота',
     'Магазины и подарки',
     'Wasabi',
     'Курьерская служба',
+    'Твори Добро',
   ];
 
   final String centerText = 'Еда';
@@ -43,15 +44,6 @@ class _CircleSpinnerState extends State<CircleSpinner> {
 
     return Center(
       child: GestureDetector(
-        onTap: () {
-          double normalizedRotation = currentRotation % (2 * math.pi); // Нормализуем угол к диапазону [0, 2*pi]
-          int pageIndex = (normalizedRotation / (math.pi / 3)).round();
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => buildPage(pageIndex),
-            ),
-          );
-        },
         onPanStart: (details) {
           startRotation = currentRotation;
         },
@@ -63,38 +55,49 @@ class _CircleSpinnerState extends State<CircleSpinner> {
         child: Container(
           width: 300.0,
           height: 300.0,
-          child: CustomPaint(
-            painter: CircleSpinnerPainter(currentRotation, colors, radii, texts, centerText),
-            child: Center(
-              child: Container(
-                width: 100.0,
-                height: 100.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-                child: Center(
-                  child: Text(
-                    centerText,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12.0,
+          child: CanvasTouchDetector(
+              gesturesToOverride: [GestureType.onTapDown],
+              builder: (context) {
+                return CustomPaint(
+                  painter: CircleSpinnerPainter(currentRotation, colors, radii,
+                    texts, centerText, context, (index) {
+
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => buildPage(index),
+                        ),
+                      );
+                    },),
+                  child: Center(
+                    child: Container(
+                      width: 100.0,
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                      child: Center(
+                        child: Text(
+                          centerText,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-          ),
+                );
+              }),
         ),
       ),
     );
   }
 
   Widget buildPage(int pageIndex) {
-    print("BuildPage $pageIndex");
     switch (pageIndex) {
       case 0:
-        return WasabiPage();
+        return FoodPage();
       case 1:
         return SupermarketPage();
       case 2:
@@ -105,8 +108,8 @@ class _CircleSpinnerState extends State<CircleSpinner> {
         return WasabiPage();
       case 5:
         return CourierPage();
-       default:
-         return Container(); // Вернуть пустой контейнер по умолчанию
+      default:
+        return Container(); // Вернуть пустой контейнер по умолчанию
     }
   }
 }
@@ -117,11 +120,16 @@ class CircleSpinnerPainter extends CustomPainter {
   final List<double> radii;
   final List<String> texts; // Текст для каждого круга
   final String centerText; // Текст для центрального круга
+  final BuildContext context;
+  final Function(int) onItemClicked;
 
-  CircleSpinnerPainter(this.rotation, this.colors, this.radii, this.texts, this.centerText);
+  CircleSpinnerPainter(this.rotation, this.colors, this.radii, this.texts,
+      this.centerText, this.context, this.onItemClicked);
 
   @override
   void paint(Canvas canvas, Size size) {
+    var myCanvas = TouchyCanvas(context, canvas);
+
     final centerX = size.width / 2;
     final centerY = size.height / 2;
     final radius = size.width / 2;
@@ -130,7 +138,6 @@ class CircleSpinnerPainter extends CustomPainter {
       final angle = math.pi / 3 * i + rotation;
       final x = centerX + radius * math.cos(angle);
       final y = centerY + radius * math.sin(angle);
-
       final paint = Paint()
         ..color = colors[i % colors.length]
         ..style = PaintingStyle.fill;
@@ -138,15 +145,17 @@ class CircleSpinnerPainter extends CustomPainter {
       final circleRadius = radii[i % radii.length];
 
       // Рисуем каждый наружный круг
-      canvas.drawCircle(Offset(x, y), circleRadius, paint);
+      myCanvas.drawCircle(Offset(x, y), circleRadius, paint, onTapDown: (_) {
+        onItemClicked(i);
+      });
 
-      // Рисуем текст внутри каждого круга
+      // // Рисуем текст внутри каждого круга
       final textStyle = TextStyle(
         color: Colors.black,
         fontSize: 12.0,
       );
       final textSpan = TextSpan(
-        text: texts[0],
+        text: texts[i],
         style: textStyle,
       );
       final textPainter = TextPainter(
@@ -155,7 +164,8 @@ class CircleSpinnerPainter extends CustomPainter {
         textAlign: TextAlign.center,
       );
       textPainter.layout(minWidth: 0, maxWidth: circleRadius * 2);
-      textPainter.paint(canvas, Offset(x - textPainter.width / 2, y - textPainter.height / 2));
+      textPainter.paint(canvas,
+          Offset(x - textPainter.width / 2, y - textPainter.height / 2));
     }
   }
 
