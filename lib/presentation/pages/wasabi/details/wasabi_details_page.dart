@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glovo_clone/presentation/pages/food_page.dart';
-import 'package:glovo_clone/presentation/pages/gifts_page.dart';
-import 'package:glovo_clone/presentation/pages/supermarket_page.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/details/drinks.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/details/sets.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/details/snacks.dart';
@@ -46,6 +43,7 @@ class _WasabiDetailsPageState extends State<WasabiDetailsPage> {
             children: [
               SetsPage(),
               SnackPage(),
+              DrinksPage()
             ],
           ),
         ),

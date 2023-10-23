@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
 
-class DrinksPage extends StatelessWidget {
+class MainDishesPage extends StatelessWidget {
   final List<SushiSet> sushiSets = [
     SushiSet(
-      name: 'Pepsi (2 л.)',
-      description: 'Газированный напиток',
-      price: 145.00,
-      imageUrl: 'assets/dishes/pepsi.jpg',
+      name: 'Казан-кебаб из говядины',
+      description: 'Ломтики говядины жареные по-китайски с луком и специями, подается с рисом на пару',
+      price: 265.00,
+      imageUrl: 'assets/dishes/kazan.jpg',
     ),
     SushiSet(
-      name: 'Pepsi (1,5 л.)',
-      description: 'Газированный напиток',
-      price: 120.00,
-      imageUrl: 'assets/dishes/pepsi.jpg',
+      name: 'Фри с мясом',
+      description: 'Ломтики говядины жареные по-китайски с картофелем фри и луком',
+      price: 265.00,
+      imageUrl: 'assets/dishes/fri_meat.jpg',
     ),
     SushiSet(
-      name: 'Pepsi (1 л.)',
-      description: 'Газированный напиток',
-      price: 90.00,
-      imageUrl: 'assets/dishes/pepsi.jpg',
-    ),
-
-    SushiSet(
-      name: "Lipton (0,5 л.)",
-      description: 'Негазированный напиток',
-      price: 60.00,
-      imageUrl: 'assets/dishes/lipton.png',
+      name: 'Курица в кисло-сладком соусе',
+      description: 'Куриное филе в соусе "Sweet chill", отдельно подается рис на пару',
+      price: 245.00,
+      imageUrl: 'assets/dishes/chicken_kislo.jpg',
     ),
   ];
 
@@ -70,7 +63,7 @@ class DrinksPage extends StatelessWidget {
             top: 20,
             left: 20,
             child: Text(
-              'Напитки',
+              'Основные блюда',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

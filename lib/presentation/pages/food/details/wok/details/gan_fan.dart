@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
 
-class DrinksPage extends StatelessWidget {
+class GanFanPage extends StatelessWidget {
   final List<SushiSet> sushiSets = [
     SushiSet(
-      name: 'Pepsi (2 л.)',
-      description: 'Газированный напиток',
-      price: 145.00,
-      imageUrl: 'assets/dishes/pepsi.jpg',
+      name: 'Сливочный Ган-фан',
+      description: 'Куриное филе, сливочный соус, рис',
+      price: 265.00,
+      imageUrl: 'assets/dishes/sliv_ganfan.jpeg',
     ),
     SushiSet(
-      name: 'Pepsi (1,5 л.)',
-      description: 'Газированный напиток',
-      price: 120.00,
-      imageUrl: 'assets/dishes/pepsi.jpg',
+      name: 'Могуру Ган-фан',
+      description: 'Рис на пару, полугорький перец, пекинская капуста, лук, сельдерей',
+      price: 265.00,
+      imageUrl: 'assets/dishes/moguru.jpg',
     ),
     SushiSet(
-      name: 'Pepsi (1 л.)',
-      description: 'Газированный напиток',
-      price: 90.00,
-      imageUrl: 'assets/dishes/pepsi.jpg',
-    ),
-
-    SushiSet(
-      name: "Lipton (0,5 л.)",
-      description: 'Негазированный напиток',
-      price: 60.00,
-      imageUrl: 'assets/dishes/lipton.png',
+      name: 'Гуйру Ган-фан',
+      description: 'Рис на пару, полугорький перец, пекинская капуста, лук, сельдерей',
+      price: 245.00,
+      imageUrl: 'assets/dishes/moguru.jpg',
     ),
   ];
 
@@ -70,7 +63,7 @@ class DrinksPage extends StatelessWidget {
             top: 20,
             left: 20,
             child: Text(
-              'Напитки',
+              'Ган-фан',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

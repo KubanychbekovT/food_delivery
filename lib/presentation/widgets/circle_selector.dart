@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:glovo_clone/presentation/pages/food_page.dart';
+import 'package:glovo_clone/presentation/pages/food/food_page.dart';
 import 'package:touchable/touchable.dart';
 import '../pages/courier_page.dart';
 import '../pages/gifts_page.dart';
@@ -18,7 +18,6 @@ class _CircleSpinnerState extends State<CircleSpinner> {
   double currentRotation = 0.0;
 
   final List<String> texts = [
-    'Еда',
     'Супермаркеты',
     'Здоровье и красота',
     'Магазины и подарки',
@@ -69,19 +68,24 @@ class _CircleSpinnerState extends State<CircleSpinner> {
                       );
                     },),
                   child: Center(
-                    child: Container(
-                      width: 100.0,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: Center(
-                        child: Text(
-                          centerText,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12.0,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => FoodPage(),));
+                      },
+                      child: Container(
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: Text(
+                            centerText,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12.0,
+                            ),
                           ),
                         ),
                       ),
@@ -97,17 +101,17 @@ class _CircleSpinnerState extends State<CircleSpinner> {
   Widget buildPage(int pageIndex) {
     switch (pageIndex) {
       case 0:
-        return FoodPage();
-      case 1:
         return SupermarketPage();
-      case 2:
+      case 1:
         return HealthPage();
-      case 3:
+      case 2:
         return GiftsPage();
-      case 4:
+      case 3:
         return WasabiPage();
-      case 5:
+      case 4:
         return CourierPage();
+      case 5:
+        return FoodPage();
       default:
         return Container(); // Вернуть пустой контейнер по умолчанию
     }
@@ -118,8 +122,8 @@ class CircleSpinnerPainter extends CustomPainter {
   final double rotation;
   final List<Color> colors;
   final List<double> radii;
-  final List<String> texts; // Текст для каждого круга
-  final String centerText; // Текст для центрального круга
+  final List<String> texts;
+  final String centerText;
   final BuildContext context;
   final Function(int) onItemClicked;
 
@@ -148,6 +152,22 @@ class CircleSpinnerPainter extends CustomPainter {
       myCanvas.drawCircle(Offset(x, y), circleRadius, paint, onTapDown: (_) {
         onItemClicked(i);
       });
+
+      // Добавляем изображение внутри круга
+      // final image = Image.asset(
+      //   'assets/your_image.png', // Замените 'your_image.png' на путь к вашему изображению
+      //   width: circleRadius * 2,
+      //   height: circleRadius * 2,
+      // );
+      // myCanvas.drawImageRect(
+      //   image: image.image,
+      //   src: Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
+      //   dst: Rect.fromCenter(center: Offset(x, y), width: circleRadius * 2, height: circleRadius * 2),
+      //   paint: Paint(),
+      //   onTapDown: (_) {
+      //     onItemClicked(i);
+      //   },
+      // );
 
       // // Рисуем текст внутри каждого круга
       final textStyle = TextStyle(
