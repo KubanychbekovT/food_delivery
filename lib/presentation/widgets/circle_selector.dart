@@ -1,8 +1,10 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:glovo_clone/presentation/pages/food/food_page.dart';
+import 'package:flutter/services.dart';
 import 'package:touchable/touchable.dart';
+import 'dart:ui' as ui;
 import '../pages/courier_page.dart';
+import '../pages/food/food_page.dart';
 import '../pages/gifts_page.dart';
 import '../pages/health_page.dart';
 import '../pages/supermarket_page.dart';
@@ -17,6 +19,17 @@ class _CircleSpinnerState extends State<CircleSpinner> {
   double startRotation = 0.0;
   double currentRotation = 0.0;
 
+  final List<ui.Image> images = [];
+  final List<String> imagePaths = [
+    'assets/dishes/sha_syr.jpg',
+    'assets/dishes/kazan.jpg',
+    'assets/dishes/shaurdog.jpg',
+    'assets/dishes/zapech.jpg',
+    'assets/dishes/moguru.jpg',
+    'assets/dishes/hanburger.jpg',
+    // Добавьте пути к другим изображениям, если нsha_syrеобходимо
+  ];
+
   final List<String> texts = [
     'Супермаркеты',
     'Здоровье и красота',
@@ -27,6 +40,29 @@ class _CircleSpinnerState extends State<CircleSpinner> {
   ];
 
   final String centerText = 'Еда';
+
+  @override
+  void initState() {
+    super.initState();
+    loadImages();
+  }
+
+  Future<void> loadImages() async {
+    for (String imagePath in imagePaths) {
+      final ui.Image image = await loadImage(imagePath);
+      images.add(image);
+    }
+
+    setState(() {});
+  }
+
+  Future<ui.Image> loadImage(String imagePath) async {
+    final ByteData data = await rootBundle.load(imagePath);
+    final Uint8List bytes = data.buffer.asUint8List();
+    final ui.Codec codec = await ui.instantiateImageCodec(bytes);
+    final ui.FrameInfo frameInfo = await codec.getNextFrame();
+    return frameInfo.image;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,44 +91,43 @@ class _CircleSpinnerState extends State<CircleSpinner> {
           width: 300.0,
           height: 300.0,
           child: CanvasTouchDetector(
-              gesturesToOverride: [GestureType.onTapDown],
-              builder: (context) {
-                return CustomPaint(
-                  painter: CircleSpinnerPainter(currentRotation, colors, radii,
-                    texts, centerText, context, (index) {
-
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => buildPage(index),
-                        ),
-                      );
-                    },),
-                  child: Center(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => FoodPage(),));
-                      },
-                      child: Container(
-                        width: 100.0,
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: Center(
-                          child: Text(
-                            centerText,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12.0,
-                            ),
+            gesturesToOverride: [GestureType.onTapDown],
+            builder: (context) {
+              return CustomPaint(
+                painter: CircleSpinnerPainter(currentRotation, colors, radii, texts, centerText, context, (index) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => buildPage(index),
+                    ),
+                  );
+                }, images),
+                child: Center(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => FoodPage(),));
+                    },
+                    child: Container(
+                      width: 100.0,
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                      child: Center(
+                        child: Text(
+                          centerText,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12.0,
                           ),
                         ),
                       ),
                     ),
                   ),
-                );
-              }),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -113,7 +148,7 @@ class _CircleSpinnerState extends State<CircleSpinner> {
       case 5:
         return FoodPage();
       default:
-        return Container(); // Вернуть пустой контейнер по умолчанию
+        return Container();
     }
   }
 }
@@ -126,9 +161,9 @@ class CircleSpinnerPainter extends CustomPainter {
   final String centerText;
   final BuildContext context;
   final Function(int) onItemClicked;
+  final List<ui.Image> images;
 
-  CircleSpinnerPainter(this.rotation, this.colors, this.radii, this.texts,
-      this.centerText, this.context, this.onItemClicked);
+  CircleSpinnerPainter(this.rotation, this.colors, this.radii, this.texts, this.centerText, this.context, this.onItemClicked, this.images);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -148,28 +183,10 @@ class CircleSpinnerPainter extends CustomPainter {
 
       final circleRadius = radii[i % radii.length];
 
-      // Рисуем каждый наружный круг
       myCanvas.drawCircle(Offset(x, y), circleRadius, paint, onTapDown: (_) {
         onItemClicked(i);
       });
 
-      // Добавляем изображение внутри круга
-      // final image = Image.asset(
-      //   'assets/your_image.png', // Замените 'your_image.png' на путь к вашему изображению
-      //   width: circleRadius * 2,
-      //   height: circleRadius * 2,
-      // );
-      // myCanvas.drawImageRect(
-      //   image: image.image,
-      //   src: Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
-      //   dst: Rect.fromCenter(center: Offset(x, y), width: circleRadius * 2, height: circleRadius * 2),
-      //   paint: Paint(),
-      //   onTapDown: (_) {
-      //     onItemClicked(i);
-      //   },
-      // );
-
-      // // Рисуем текст внутри каждого круга
       final textStyle = TextStyle(
         color: Colors.black,
         fontSize: 12.0,
@@ -186,6 +203,16 @@ class CircleSpinnerPainter extends CustomPainter {
       textPainter.layout(minWidth: 0, maxWidth: circleRadius * 2);
       textPainter.paint(canvas,
           Offset(x - textPainter.width / 2, y - textPainter.height / 2));
+
+      if (i < images.length) {
+        final ui.Image image = images[i];
+        final imageRect = Rect.fromCenter(
+          center: Offset(x, y),
+          width: circleRadius * 0.8,
+          height: circleRadius * 0.8,
+        );
+        canvas.drawImageRect(image, imageRect, imageRect, paint);
+      }
     }
   }
 
