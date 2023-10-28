@@ -1,29 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:glovo_clone/data/restaurants.dart';
-import 'package:glovo_clone/presentation/pages/wasabi/details/wasabi_details_page.dart';
+import 'package:glovo_clone/presentation/pages/food/details/okiniiri/okiniiri_details_page.dart';
 
 class RestaurantDetailsPage extends StatelessWidget {
-  final Restaurant restaurant;
-
-  RestaurantDetailsPage(this.restaurant);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(restaurant.name),
-      ),
-      body: Center(
-        child: Text("Details of ${restaurant.name}"),
+      backgroundColor: Colors.black,
+      body: Column(
+        children: [
+
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30.0),
+                ),
+              ),
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.all(16.0),
+                children: <Widget>[
+                  CategoryCard('Сеты'),
+                  CategoryCard('Закуски'),
+                  CategoryCard('Супы'),
+                  CategoryCard('Напитки'),
+                  CategoryCard('Рамен'),
+                  CategoryCard('Фаст-фуд'),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
 class CategoryCard extends StatelessWidget {
-  final Restaurant restaurant;
+  final String categoryName;
 
-  CategoryCard(this.restaurant);
+  CategoryCard(this.categoryName);
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +50,17 @@ class CategoryCard extends StatelessWidget {
       elevation: 4.0,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => RestaurantDetailsPage(restaurant)));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => OkiniiriDetailsPage()));
         },
-        child: Container(
-          height: 100.0,
+        child: Container( // Оберните текст и иконку контейнером
+          height: 100.0, // Задайте желаемую высоту
           padding: EdgeInsets.all(16.0),
           child: Stack(
             children: [
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  restaurant.name,
+                  categoryName.toUpperCase(),
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.black,

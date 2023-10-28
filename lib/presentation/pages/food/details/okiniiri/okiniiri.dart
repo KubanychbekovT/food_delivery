@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:glovo_clone/presentation/pages/food/details/okiniiri/okiniiri_details_page.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/details/wasabi_details_page.dart';
 
 class OkiniiriPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Column(
         children: [
           Image.asset(
-            ''
+            'assets/restaurants/okiniiri.jpg',
+            fit: BoxFit.cover,
+            height: 100,
+            width: double.infinity,
           ),
           Expanded(
             child: Container(
@@ -25,16 +30,11 @@ class OkiniiriPage extends StatelessWidget {
                   Text('Okiniiri', style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w700),),
                   SizedBox(height: 20),
                   CategoryCard('Сеты'),
-                  CategoryCard('Завтраки'),
+                  CategoryCard('Закуски'),
                   CategoryCard('Супы'),
-                  CategoryCard('Салаты'),
+                  CategoryCard('Напитки'),
                   CategoryCard('Рамен'),
                   CategoryCard('Фаст-фуд'),
-                  CategoryCard('Пицца'),
-                  CategoryCard('Суши'),
-                  CategoryCard('Роллы'),
-                  CategoryCard('Добавки'),
-                  CategoryCard('Бар'),
                 ],
               ),
             ),
@@ -58,7 +58,7 @@ class CategoryCard extends StatelessWidget {
       elevation: 4.0,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => WasabiDetailsPage()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => OkiniiriDetailsPage()));
         },
         child: Container( // Оберните текст и иконку контейнером
           height: 100.0, // Задайте желаемую высоту

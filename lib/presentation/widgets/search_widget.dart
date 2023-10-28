@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
-  const Search({super.key});
+  const Search({Key? key});
 
   @override
   State<Search> createState() => _SearchState();
@@ -14,60 +14,39 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: _searchController,
-                      style: const TextStyle(color: Colors.black),
-                      textInputAction: TextInputAction.search,
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                        filled: true,
-                        prefixIcon: IconButton(
-                          icon: const Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                          ),
-                          onPressed: () {},
-                        ),
-                        hintStyle: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20,
-                        ),
-                        hintText: 'Поиск',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                            width: 3,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                            width: 3,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                            width: 2,
-                          ),
-                        ),
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  width: 350.0, // Задайте нужную ширину
+                  decoration: BoxDecoration(
+                    color: Colors.yellow.shade200,
+                    borderRadius: BorderRadius.circular(30.0), // Задаем радиус для закругленных углов
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 3,
+                        offset: Offset(0, 2),
                       ),
-                      cursorColor: Colors.grey,
-                    )],
+                    ],
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Что вам привезти?',
+                      prefixIcon: Icon(Icons.search),
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,14 +1,17 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:glovo_clone/presentation/pages/gifts_page.dart';
+import 'package:glovo_clone/presentation/pages/health_page.dart';
+import 'package:glovo_clone/presentation/pages/supermarket_page.dart';
+import 'package:glovo_clone/presentation/pages/wasabi/wasabi_page.dart';
 import 'package:touchable/touchable.dart';
 import 'dart:ui' as ui;
+
 import '../pages/courier_page.dart';
 import '../pages/food/food_page.dart';
-import '../pages/gifts_page.dart';
-import '../pages/health_page.dart';
-import '../pages/supermarket_page.dart';
-import '../pages/wasabi/wasabi_page.dart';
+
+
 
 class CircleSpinner extends StatefulWidget {
   @override
@@ -21,13 +24,13 @@ class _CircleSpinnerState extends State<CircleSpinner> {
 
   final List<ui.Image> images = [];
   final List<String> imagePaths = [
-    'assets/dishes/sha_syr.jpg',
-    'assets/dishes/kazan.jpg',
-    'assets/dishes/shaurdog.jpg',
-    'assets/dishes/zapech.jpg',
-    'assets/dishes/moguru.jpg',
-    'assets/dishes/hanburger.jpg',
-    // Добавьте пути к другим изображениям, если нsha_syrеобходимо
+    // 'assets/icons/super.png',
+    // 'assets/icons/health.png',
+    // 'assets/icons/gift.png',
+    // 'assets/icons/wasabiic.png',
+    // 'assets/icons/courier.png',
+    // 'assets/icons/charity.jpg',
+    // Добавьте пути к другим изображениям, если необходимо
   ];
 
   final List<String> texts = [
@@ -118,7 +121,8 @@ class _CircleSpinnerState extends State<CircleSpinner> {
                           centerText,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12.0,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold
                           ),
                         ),
                       ),
@@ -189,7 +193,8 @@ class CircleSpinnerPainter extends CustomPainter {
 
       final textStyle = TextStyle(
         color: Colors.black,
-        fontSize: 12.0,
+        fontSize: 14.0,
+        fontWeight: FontWeight.bold
       );
       final textSpan = TextSpan(
         text: texts[i],

@@ -5,11 +5,11 @@ class WokPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.black,
       body: Column(
         children: [
           Image.asset(
-            'assets/restaurants/wok.jpeg',
+            'assets/restaurants/wok.jpg',
             fit: BoxFit.cover,
             width: double.infinity,
             height: 100,
@@ -32,7 +32,6 @@ class WokPage extends StatelessWidget {
                     CategoryCard('Основные блюда'),
                     CategoryCard('Лагманы'),
                     CategoryCard('Ган фан'),
-                    CategoryCard('Гарниры'),
                     CategoryCard('Напитки'),
                     // Добавьте другие категории здесь
                   ],

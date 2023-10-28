@@ -6,13 +6,13 @@ class SnackPage extends StatelessWidget {
       name: 'Нагетсы',
       description: 'Нагетсы, картошка фри, чили соус',
       price: 450.00,
-      imageUrl: 'https://example.com/philadelphia.jpg',
+      imageUrl: 'assets/dishes/нагетсы.jpg',
     ),
     SnackSet(
       name: 'Крылышки Баффало',
       description: 'Краб, авокадо, огурец, рис, икра масаго',
       price: 450.00,
-      imageUrl: 'https://example.com/california.jpg',
+      imageUrl: 'assets/dishes/крылья-баффало.jpg',
     ),
   ];
 

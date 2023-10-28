@@ -1,10 +1,11 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:glovo_clone/presentation/pages/food/details/ekidos/eki_dos.dart';
-import 'package:glovo_clone/presentation/pages/food/details/okiiniri/okiniiri.dart';
 import 'package:glovo_clone/presentation/pages/food/details/restaurant/restaurants.dart';
 import 'package:glovo_clone/presentation/pages/food/details/wok/wok.dart';
+import 'package:glovo_clone/presentation/widgets/search_widget.dart';
 import 'package:touchable/touchable.dart';
+import 'details/okiniiri/okiniiri.dart';
 
 class FoodPage extends StatefulWidget {
   @override
@@ -38,37 +39,47 @@ class _FoodPageState extends State<FoodPage> {
 
     return Scaffold(
       backgroundColor: Colors.amber,
-      body: Center(
-        child: GestureDetector(
-          onPanStart: (details) {
-            startRotation = currentRotation;
-          },
-          onPanUpdate: (details) {
-            setState(() {
-              currentRotation = startRotation + details.delta.dx / 100;
-            });
-          },
-          child: Container(
-            width: 300.0,
-            height: 300.0,
-            child: CanvasTouchDetector(
-                gesturesToOverride: [GestureType.onTapDown],
-                builder: (context) {
-                  return CustomPaint(
-                    painter: CircleSpinnerPainter(currentRotation, colors, radii,
-                      texts, context, (index) {
+      body: Column(
+        children: [
+          SizedBox(height: 50),
+          Search(),
+          SizedBox(height: 150),
+          Center(
+            child: GestureDetector(
+              onPanStart: (details) {
+                startRotation = currentRotation;
+              },
+              onPanUpdate: (details) {
+                setState(() {
+                  currentRotation = startRotation + details.delta.dx / 100;
+                });
+              },
+              child: Container(
+                width: 300.0,
+                height: 300.0,
+                child: CanvasTouchDetector(
+                    gesturesToOverride: [GestureType.onTapDown],
+                    builder: (context) {
+                      return CustomPaint(
+                        painter: CircleSpinnerPainter(currentRotation, colors, radii,
+                          texts, context, (index) {
 
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => buildPage(index),
-                          ),
-                        );
-                      },),
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => buildPage(index),
+                              ),
+                            );
+                          },),
 
-                  );
-                }),
+                      );
+                    }),
+              ),
+            ),
           ),
-        ),
+          SizedBox(height: 80),
+          Text('Еда', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 24),),
+
+        ],
       ),
     );
   }
@@ -128,7 +139,8 @@ class CircleSpinnerPainter extends CustomPainter {
       // // Рисуем текст внутри каждого круга
       final textStyle = TextStyle(
         color: Colors.black,
-        fontSize: 12.0,
+        fontSize: 14.0,
+        fontWeight: FontWeight.bold,
       );
       final textSpan = TextSpan(
         text: texts[i],

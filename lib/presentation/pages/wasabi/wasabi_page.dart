@@ -13,9 +13,7 @@ class WasabiPage extends StatelessWidget {
           CategoryCard('Закуски'),
           CategoryCard('Комбо'),
           CategoryCard('Роллы'),
-          CategoryCard('Теплые Роллы'),
           CategoryCard('Горячие блюда'),
-          CategoryCard('Пиццы'),
           CategoryCard('Напитки'),
           // Добавьте другие категории здесь
         ],

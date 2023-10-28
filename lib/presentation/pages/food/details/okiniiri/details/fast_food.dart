@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class SetsPage extends StatelessWidget {
-  final List<SushiSet> sushiSets = [
-    SushiSet(
-      name: 'Праздничный сет',
-      description: 'Лосось, огурец, авокадо, филадельфия, рис',
-      price: 3200.00,
-      imageUrl: 'assets/dishes/set_kaliforniya_0.jpg',
+class FastFoodPage extends StatelessWidget {
+  final List<SnackSet> snackSets = [
+    SnackSet(
+      name: 'Гамбургер',
+      description: 'Говяжья котлета, приготовленная на огне, маринованные огурчики, золотистая горчица и кетчуп на мягкой булочке, посыпанной кунжутом.',
+      price: 150.00,
+      imageUrl: 'assets/dishes/hamburger.jpg',
     ),
-    SushiSet(
-      name: 'Сет "Калифорния"',
-      description: 'Краб, авокадо, огурец, рис, икра масаго',
-      price: 2500.00,
-      imageUrl: 'assets/dishes/prazdnichnyj-set.jpg',
+    SnackSet(
+      name: 'Чизбургер',
+      description: 'Говяжья котлета, приготовленная на огне, с ломтиком слегка расплавленного сыра, маринованные огурчики, золотистая горчица и кетчуп на мягкой булочке, посыпанной кунжутом.',
+      price: 150.00,
+      imageUrl: 'assets/dishes/cheezeburger.jpg',
     ),
   ];
 
@@ -24,9 +24,9 @@ class SetsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 56.0), // Добавьте отступы
             child: ListView.builder(
-              itemCount: sushiSets.length,
+              itemCount: snackSets.length,
               itemBuilder: (BuildContext context, int index) {
-                final sushiSet = sushiSets[index];
+                final sushiSet = snackSets[index];
                 return ListTile(
                   leading: Image.network(sushiSet.imageUrl),
                   title: Text(sushiSet.name),
@@ -40,7 +40,7 @@ class SetsPage extends StatelessWidget {
             top: 20, // Расположение текста сверху
             left: 20, // Расположение текста слева
             child: Text(
-              'Список сетов суши',
+              'Фаст-фуд',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -53,13 +53,14 @@ class SetsPage extends StatelessWidget {
   }
 }
 
-class SushiSet {
+
+class SnackSet {
   final String name;
   final String description;
   final double price;
   final String imageUrl;
 
-  SushiSet({
+  SnackSet({
     required this.name,
     required this.description,
     required this.price,

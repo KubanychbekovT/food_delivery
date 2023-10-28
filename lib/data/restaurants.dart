@@ -10,7 +10,7 @@ class Restaurant {
 final List<Restaurant> restaurants = [
   Restaurant(
     name: 'Wasabi',
-    imageUrl: 'assets/restaurants/wasabi.jpg',
+    imageUrl: 'assets/restaurants/photo2jpg.jpg',
 
   ),
   Restaurant(
@@ -19,6 +19,15 @@ final List<Restaurant> restaurants = [
   ),
   Restaurant(
     name: 'WoK Lagman',
-    imageUrl: 'assets/restaurants/wok.jpeg',
+    imageUrl: 'assets/restaurants/wok.jpg',
   ),
+  Restaurant(
+    name: 'Okiniiri',
+    imageUrl: 'assets/restaurants/okiniiri.jpg',
+  ),
+  Restaurant(
+    name: 'Oasis',
+    imageUrl: 'assets/restaurants/oasis.jpg',
+  ),
+
 ];
