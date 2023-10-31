@@ -28,7 +28,7 @@ class FastFoodPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 final sushiSet = snackSets[index];
                 return ListTile(
-                  leading: Image.network(sushiSet.imageUrl),
+                  leading: Image.asset(sushiSet.imageUrl),
                   title: Text(sushiSet.name),
                   subtitle: Text(sushiSet.description),
                   trailing: Text('${sushiSet.price.toStringAsFixed(2)}kgs'),
