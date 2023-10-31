@@ -16,7 +16,7 @@ class YourGridItemWidget extends StatelessWidget {
         );
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 70),
+        margin: EdgeInsets.symmetric(horizontal: 10, ),
         decoration: BoxDecoration(
           //color: Colors.blue,
           borderRadius: BorderRadius.circular(8.0),
@@ -27,7 +27,7 @@ class YourGridItemWidget extends StatelessWidget {
             Image.asset(
               imagePath,
               fit: BoxFit.cover,
-              height: 80,
+              height: 100,
               width: 300,
             ),
             SizedBox(height: 2.0),
