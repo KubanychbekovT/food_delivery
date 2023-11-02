@@ -7,7 +7,6 @@ import 'package:glovo_clone/presentation/pages/supermarket_page.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/wasabi_page.dart';
 import 'package:touchable/touchable.dart';
 import 'dart:ui' as ui;
-
 import '../pages/courier_page.dart';
 import '../pages/food/food_page.dart';
 

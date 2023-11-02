@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:glovo_clone/presentation/widgets/circle_selector.dart';
 import 'package:glovo_clone/presentation/widgets/drawer.dart';
 import 'package:glovo_clone/presentation/widgets/search_widget.dart';
-
 import '../widgets/griditem_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -66,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     delegate: SliverChildBuilderDelegate(
                           (context, index) {
-                        return YourGridItemWidget(
+                        return GridItemWidget(
                           imagePath: imagePaths[index % imagePaths.length],
                           restaurantName: restaurantNames[index % restaurantNames.length],
                         );

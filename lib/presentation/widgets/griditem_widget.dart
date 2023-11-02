@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/wasabi_page.dart';
 
-class YourGridItemWidget extends StatelessWidget {
+class GridItemWidget extends StatelessWidget {
   final String imagePath;
   final String restaurantName;
 
-  YourGridItemWidget({required this.imagePath, required this.restaurantName});
+  GridItemWidget({required this.imagePath, required this.restaurantName});
 
   @override
   Widget build(BuildContext context) {

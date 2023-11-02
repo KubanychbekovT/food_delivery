@@ -97,7 +97,7 @@ class _FoodPageState extends State<FoodPage> {
       case 4:
         return WokPage();
       default:
-        return Container(); // Вернуть пустой контейнер по умолчанию
+        return Container();
     }
   }
 }
@@ -106,7 +106,7 @@ class CircleSpinnerPainter extends CustomPainter {
   final double rotation;
   final List<Color> colors;
   final List<double> radii;
-  final List<String> texts; // Текст для каждого круга
+  final List<String> texts;
   final BuildContext context;
   final Function(int) onItemClicked;
 
@@ -131,12 +131,10 @@ class CircleSpinnerPainter extends CustomPainter {
 
       final circleRadius = radii[i % radii.length];
 
-      // Рисуем каждый наружный круг
       myCanvas.drawCircle(Offset(x, y), circleRadius, paint, onTapDown: (_) {
         onItemClicked(i);
       });
 
-      // // Рисуем текст внутри каждого круга
       final textStyle = TextStyle(
         color: Colors.black,
         fontSize: 14.0,
