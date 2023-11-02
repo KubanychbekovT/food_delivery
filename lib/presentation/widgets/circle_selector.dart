@@ -87,7 +87,7 @@ class _CircleSpinnerState extends State<CircleSpinner> {
         },
         onPanUpdate: (details) {
           setState(() {
-            currentRotation = startRotation + details.delta.dx / 100;
+            currentRotation = startRotation + details.delta.dx / 40;
           });
         },
         child: Container(

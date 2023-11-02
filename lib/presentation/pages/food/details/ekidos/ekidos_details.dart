@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:glovo_clone/presentation/pages/food/details/ekidos/details/fast_food.dart';
 import 'package:glovo_clone/presentation/pages/food/details/ekidos/details/shaurma.dart';
 import 'package:glovo_clone/presentation/pages/wasabi/details/drinks.dart';
-import 'package:glovo_clone/presentation/pages/wasabi/details/sets.dart';
-import 'package:glovo_clone/presentation/pages/wasabi/details/snacks.dart';
 
 class EkidosDetailsPage extends StatefulWidget {
   const EkidosDetailsPage({super.key});

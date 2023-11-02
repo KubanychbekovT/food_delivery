@@ -58,8 +58,7 @@ class CategoryCard extends StatelessWidget {
               MaterialPageRoute(builder: (context) => EkidosDetailsPage()));
         },
         child: Container(
-          // Оберните текст и иконку контейнером
-          height: 100.0, // Задайте желаемую высоту
+          height: 100.0,
           padding: EdgeInsets.all(16.0),
           child: Stack(
             children: [
